@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Converter & Tracker</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@100;900&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="convert.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+   
+
+    <!-- Main Content -->
+    <main class="app-container">
+        <h1>Crypto Converter & Tracker</h1>
+        <nav class="tab-navigation">
+            <button class="tab active" onclick="showTab('converter')">Converter</button>
+            <button class="tab" onclick="showTab('tracker')">Watchlist</button>
+        </nav>
+        <section class="tab-content-container">
+            <!-- Converter Tab -->
+            <article id="converter" class="tab-content active">
+                <h2>Crypto to Fiat Converter</h2>
+                <div class="conversion-form">
+                    <div class="input-group">
+                        <label for="crypto-select">Cryptocurrency</label>
+                        <select id="crypto-select">
+                            <option value="bitcoin">Bitcoin (BTC)</option>
+                            <option value="ethereum">Ethereum (ETH)</option>
+                            <option value="solana">Solana (SOL)</option>
+                            <option value="cardano">Cardano (ADA)</option>
+                        </select>
+                        <input type="number" id="crypto-amount" placeholder="Amount in Crypto" aria-label="Amount in Cryptocurrency">
+                    </div>
+                    <div class="conversion-icon">
+                        <button id="toggle-direction" aria-label="Toggle conversion direction" onclick="toggleDirection()">
+                            <i class="fas fa-exchange-alt"></i>
+                        </button>
+                    </div>
+                    <div class="input-group">
+                        <label for="fiat-select">Fiat Currency</label>
+                        <select id="fiat-select">
+                            <option value="usd">USD</option>
+                            <option value="eur">EUR</option>
+                            <option value="ngn">NGN</option>
+                            <option value="gbp">GBP</option>
+                        </select>
+                        <input type="text" id="fiat-amount" placeholder="Converted Amount" readonly aria-label="Converted Amount">
+                    </div>
+                    <button id="convert-button" class="convert-button" onclick="convertCrypto()">Convert</button>
+                    <p id="conversion-result"></p>
+                </div>
+            </article>
+
+            <!-- Tracker Tab -->
+            <article id="tracker" class="tab-content">
+                
+                <div class="watchlist-container">
+                    <h3>Crypto Watchlist</h3>
+                    <div class="add-crypto-container">
+                        <input id="crypto-input" type="text" placeholder="Enter cryptocurrency name (e.g., bitcoin)">
+                        <button id="add-crypto-button" onclick="addCrypto()">Add</button>
+                        <div id="suggestions" class="suggestions"></div>
+                    </div>
+                    <ul id="crypto-list">
+                        <!-- Watchlist items will be dynamically populated here -->
+                    </ul>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+    
+    <script src="convert.js"></script>
+</body>
+</html>

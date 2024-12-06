@@ -1,0 +1,397 @@
+/* Variables */
+:root {
+  --background-color: #121212; /* Dark background */
+  --text-color: #ffffff; /* Light text */
+  --primary-color: #35a038; /* Green color */
+  --secondary-color: #1E1E1E; /* Darker background for sections */
+  --input-background: #1E1E1E; /* Input background */
+  --input-border: #333333; /* Input border color */
+  --hover-color: #3D3D3D; /* Hover color for buttons */
+  --shadow-color: rgba(0, 0, 0, 0.2); /* Shadow color */
+  --gradient-background: linear-gradient(135deg, #1E1E1E, #121212); /* Gradient background */
+}
+
+/* Global Styles */
+body {
+  margin: 0;
+  font-family: 'Kanit', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+/* Navbar Styles */
+
+
+/* General Layout */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  max-width: 800px;
+  margin: auto;
+  margin-top: 30px;
+  padding: 30px;
+  background-color: var(--secondary-color);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+/* Tab Navigation */
+.tab-navigation {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px }
+
+.tab {
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 12px 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.tab.active {
+  background-color: var(--primary-color);
+}
+
+.tab:hover {
+  background-color: var(--hover-color);
+  transform: translateY(-2px);
+}
+
+/* Tab Content */
+.tab-content-container {
+  background-color: var(--secondary-color);
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 2px 5px var(--shadow-color);
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Conversion Form */
+.conversion-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.input-group label {
+  font-size: 14px;
+  color: var(--text-color);
+}
+
+input[type="number"],
+input[type="text"],
+select {
+  padding: 12px;
+  border: 1px solid var(--input-border);
+  border-radius: 5px;
+  background-color: var(--input-background);
+  color: var(--text-color);
+  font-size: 16px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="number"]:focus,
+input[type="text"]:focus,
+select:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 3px var(--primary-color);
+}
+
+/* Conversion Button */
+.convert-button {
+  padding: 12px 25px;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.convert-button:hover {
+  background-color: var(--hover-color);
+  transform: scale(1.05);
+}
+
+/* Watchlist Container */
+.watchlist-container {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: var(--secondary-color);
+  border-radius: 10px;
+  box-shadow: 0 2px 5px var(--shadow-color);
+}
+
+/* Add Crypto Container */
+.add-crypto-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+#crypto-input {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid var(--input-border);
+  border-radius: 5px;
+  background-color: var(--input-background);
+  color: var(--text-color);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#crypto-input:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 5px var(--primary-color);
+}
+
+/* Crypto List */
+#crypto-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+#crypto-list li {
+  background-color: var(--input-background);
+  padding: 12px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+#crypto-list li:hover {
+  background-color: var(--hover-color);
+}
+
+/* Delete Button */
+.delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--secondary-color);
+  background-color: var(--input-border);
+  width: 30px;
+  height: 30px;
+  font-size: 16px;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+  color: var(--hover-color);
+}
+
+/* Suggestions */
+.suggestions {
+  position: absolute;
+  background: var(--secondary-color);
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+  width: calc(100% - 22px);
+  display: none;
+}
+
+.suggestion-item {
+  padding: 12px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.suggestion-item:hover {
+  background: var(--hover-color);
+}
+
+/* List Styles */
+/* Input Container */
+#crypto-input-container {
+  display: flex; /* Use flexbox for alignment */
+  align-items: center; /* Center items vertically */
+  margin: 20px 0; /* Add margin for spacing */
+}
+
+/* Input Field */
+#crypto-input {
+  flex: 1; /* Allow the input to take available space */
+  padding: 10px 15px; /* Padding for better touch targets */
+  font-size: 1rem; /* Font size for readability */
+  border: 1px solid var(--input-border); /* Border color */
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0 2px 5px var(--shadow-color); /* Subtle shadow for depth */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for focus */
+}
+
+/* Input Focus State */
+#crypto-input:focus {
+  border-color: var(--primary-color); /* Change border color on focus */
+  box-shadow: 0 0 5px var(--primary-color); /* Glow effect on focus */
+  outline: none; /* Remove default outline */
+}
+
+/* Add Button */
+#add-crypto-button {
+  padding: 10px 20px; /* Padding for better touch targets */
+  margin-left: 10px; /* Space between input and button */
+  font-size: 1rem; /* Font size for readability */
+  color: #fff; /* Text color */
+  background-color: var(--primary-color); /* Button background color */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition for hover */
+}
+
+/* Button Hover State */
+#add-crypto-button:hover {
+  background-color: var(--hover-color); /* Change background color on hover */
+  transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+/* Button Disabled State */
+#add-crypto-button:disabled {
+  background-color: #ccc; /* Gray background for disabled state */
+  cursor: not-allowed; /* Not-allowed cursor */
+}
+
+/* Crypto Icon */
+.crypto-icon {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.crypto-info {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.crypto-name {
+  font-weight: 400;
+  margin-right: 20px;
+}
+
+.price {
+  font-size: 1rem;
+  color: #333;
+}
+
+.change {
+  font-size: 0.9rem;
+  margin-left: 10px;
+}
+
+.change.negative {
+  color: red;
+}
+
+.change.positive {
+  color: green;
+}
+
+/* Light Mode */
+body.light-mode {
+  --background-color: #ffffff;
+  --text-color: #000000;
+  --primary-color: #4CAF50;
+  --secondary-color: #f0f0f0;
+  --input-background: #ffffff;
+  --input-border: #cccccc;
+  --hover-color: #e0e0e0;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--secondary-color);
+}
+
+/* Responsive Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-size: calc(1.5rem + 1vw);
+  margin: 0;
+}
+
+p {
+  font-size: calc(1rem + 0.2vw);
+  line-height: 1.5;
+}
+
+/* Card Design */
+.card {
+  background-color: var(--secondary-color);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 5px var(--shadow-color);
+  margin-bottom: 20px;
+}
+
+.card-header {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.card-content {
+  font-size: 1rem;
+}
+
+/* Media Queries for Larger Screens */
+@media (min-width: 769px) {
+  .container {
+    padding: 40px;
+  }
+
+  .nav-links {
+    gap: 40px;
+  }
+ul {
+    display: none;
+}
+
+  .tab {
+    width: 100%;
+    padding: 15px 30px;
+  }
+
+  .convert-button, .add-crypto-container button {
+    padding: 14px 30px;
+  }
+}
