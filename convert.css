@@ -1,15 +1,14 @@
 /* Variables */
 :root {
-  --background-color: #121212; /* Dark background */
-  --text-color: #ffffff; /* Light text */
-  --primary-color: #35a038; /* Green color */
-  --secondary-color: #1E1E1E; /* Darker background for sections */
-  --input-background: #1E1E1E; /* Input background */
-  --input-border: #333333; /* Input border color */
-  --hover-color: #3D3D3D; /* Hover color for buttons */
-  --shadow-color: rgba(0, 0, 0, 0.2); /* Shadow color */
-  --gradient-background: linear-gradient(135deg, #1E1E1E, #121212); /* Gradient background */
-}
+  ---background-color: #ffffff;
+  --text-color: #000000;
+  --primary-color: #4CAF50;
+  --secondary-color: #f0f0f0;
+  --input-background: #ffffff;
+  --input-border: #cccccc;
+  --hover-color: #e0e0e0;
+  }
+
 
 /* Global Styles */
 body {
@@ -23,11 +22,11 @@ body {
 
 
 /* General Layout */
-.container {
+.tab-content-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height:auto;
   max-width: 800px;
   margin: auto;
   margin-top: 30px;
@@ -40,12 +39,17 @@ body {
   margin-bottom: 30px;
   width: 100%;
 }
-
+    
 /* Tab Navigation */
 .tab-navigation {
   display: flex;
   justify-content: center;
-  margin-bottom: 30px }
+  margin-bottom: 30px;
+  max-width: 700px;
+  margin: auto;
+  margin-top: 30px;
+  padding: 30px;
+  }
 
 .tab {
   background-color: var(--secondary-color);
@@ -137,36 +141,174 @@ select:focus {
   transform: scale(1.05);
 }
 
-/* Watchlist Container */
+
+/* Container Styling */
+#conversion-result {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid var(--input-border);
+  border-radius: 8px;
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  box-shadow: 0 2px 5px var(--shadow-color);
+  line-height: 1.5;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Highlight Specific Parts */
+.conversion-success {
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.conversion-amount {
+  font-weight: bold;
+  font-size: 18px;
+  color: var(--highlight-color);
+}
+
+.conversion-type, .conversion-result-currency {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: var(--highlight-color);
+}
+
+.conversion-result-value {
+  font-size: 18px;
+  color: var(--highlight-color);
+  font-weight: bold;
+}
+
+/* Hover Effects */
+.conversion-result:hover {
+  background-color: var(--hover-color);
+  color: #fff;
+  box-shadow: 0 4px 10px var(--shadow-color);
+}
+
+#convert-button.loading {
+  background-color: var(--primary-color);
+  color: #fff;
+  cursor: not-allowed;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(.8);
+    opacity: 0.7;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
 .watchlist-container {
   margin-top: 30px;
   padding: 20px;
   background-color: var(--secondary-color);
   border-radius: 10px;
   box-shadow: 0 2px 5px var(--shadow-color);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Add Crypto Container */
 .add-crypto-container {
   display: flex;
+  flex-direction: column;
   gap: 10px;
   margin-bottom: 20px;
 }
 
+.search-group {
+  position: relative;
+  width: 100%;
+}
+
 #crypto-input {
-  flex: 1;
-  padding: 12px;
+  width: 100%;
   border: 1px solid var(--input-border);
   border-radius: 5px;
+  padding: 12px 50px 12px 20px;
   background-color: var(--input-background);
   color: var(--text-color);
+  line-height: 1.5;
+  box-sizing: border-box;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 #crypto-input:focus {
   border-color: var(--primary-color);
-  outline: none;
   box-shadow: 0 0 5px var(--primary-color);
+  outline: none;
+}
+
+/* Add Button */
+#add-crypto-button {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  bottom: 5px;
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  font-size: 14px;
+}
+
+#add-crypto-button:hover {
+  background-color: var(--hover-color);
+  transform: translateY(-2px);
+}
+
+/* Suggestions Dropdown */
+.suggestions {
+  position: absolute;
+  background: var(--secondary-color);
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+  max-height: 200px;
+  margin-top: 40px;
+  overflow-y: auto;
+  z-index: 1000;
+  width: auto;
+  display: none;
+}
+.suggestion-item {
+  padding: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.suggestion-item:hover {
+  background-color: var(--hover-color);
+  color: #fff;
 }
 
 /* Crypto List */
@@ -174,6 +316,8 @@ select:focus {
   list-style: none;
   padding: 0;
   margin-top: 20px;
+ 
+ 
 }
 
 #crypto-list li {
@@ -184,11 +328,14 @@ select:focus {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: background-color 0.3s ease;
+  flex-direction: column;
+  width: 300px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 #crypto-list li:hover {
   background-color: var(--hover-color);
+  box-shadow: 0 2px 5px var(--shadow-color);
 }
 
 /* Delete Button */
@@ -201,102 +348,64 @@ select:focus {
   width: 30px;
   height: 30px;
   font-size: 16px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   transition: color 0.3s ease, background-color 0.3s ease;
 }
 
 .delete-btn:hover {
   color: var(--hover-color);
+  background-color: var(--primary-color);
 }
 
-/* Suggestions */
-.suggestions {
-  position: absolute;
-  background: var(--secondary-color);
-  border: 1px solid var(--input-border);
-  border-radius: 4px;
-  max-height: 200px;
-  overflow-y: auto;
-  z-index: 1000;
-  width: calc(100% - 22px);
-  display: none;
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .watchlist-container {
+    padding: 15px;
+  }
+
+  .add-crypto-container {
+    gap: 5px;
+  }
+
+  #add-crypto-button {
+    padding: 10px 25px;
+    font-size: 12px;
+  }
+
+  #crypto-list li {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .delete-btn {
+    width: 25px;
+    height: 25px;
+    font-size: 14px;
+  }
 }
 
-.suggestion-item {
-  padding: 12px;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.suggestion-item:hover {
-  background: var(--hover-color);
-}
-
-/* List Styles */
-/* Input Container */
-#crypto-input-container {
-  display: flex; /* Use flexbox for alignment */
-  align-items: center; /* Center items vertically */
-  margin: 20px 0; /* Add margin for spacing */
-}
-
-/* Input Field */
-#crypto-input {
-  flex: 1; /* Allow the input to take available space */
-  padding: 10px 15px; /* Padding for better touch targets */
-  font-size: 1rem; /* Font size for readability */
-  border: 1px solid var(--input-border); /* Border color */
-  border-radius: 5px; /* Rounded corners */
-  box-shadow: 0 2px 5px var(--shadow-color); /* Subtle shadow for depth */
-  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for focus */
-}
-
-/* Input Focus State */
-#crypto-input:focus {
-  border-color: var(--primary-color); /* Change border color on focus */
-  box-shadow: 0 0 5px var(--primary-color); /* Glow effect on focus */
-  outline: none; /* Remove default outline */
-}
-
-/* Add Button */
-#add-crypto-button {
-  padding: 10px 20px; /* Padding for better touch targets */
-  margin-left: 10px; /* Space between input and button */
-  font-size: 1rem; /* Font size for readability */
-  color: #fff; /* Text color */
-  background-color: var(--primary-color); /* Button background color */
-  border: none; /* Remove default border */
-  border-radius: 5px; /* Rounded corners */
-  cursor: pointer; /* Pointer cursor on hover */
-  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition for hover */
-}
-
-/* Button Hover State */
-#add-crypto-button:hover {
-  background-color: var(--hover-color); /* Change background color on hover */
-  transform: translateY(-2px); /* Slight lift effect on hover */
-}
-
-/* Button Disabled State */
-#add-crypto-button:disabled {
-  background-color: #ccc; /* Gray background for disabled state */
-  cursor: not-allowed; /* Not-allowed cursor */
-}
 
 /* Crypto Icon */
 .crypto-icon {
   width: 30px;
   height: 30px;
-  margin-right: 10px;
+  font-size: 14px;
+  
+  
 }
 
 .crypto-info {
-  flex: 1;
+  
   display: flex;
   align-items: center;
+  flex: 1;
 }
 
 .crypto-name {
-  font-weight: 400;
+  font-weight: 500;
   margin-right: 20px;
 }
 
@@ -306,11 +415,13 @@ select:focus {
 }
 
 .change {
-  font-size: 0.9rem;
+   font-size: .9rem;
+  font-weight: 500;
   margin-left: 10px;
 }
 
 .change.negative {
+ 
   color: red;
 }
 
@@ -318,80 +429,17 @@ select:focus {
   color: green;
 }
 
-/* Light Mode */
-body.light-mode {
-  --background-color: #ffffff;
-  --text-color: #000000;
-  --primary-color: #4CAF50;
-  --secondary-color: #f0f0f0;
-  --input-background: #ffffff;
-  --input-border: #cccccc;
-  --hover-color: #e0e0e0;
-}
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
 
-::-webkit-scrollbar-thumb {
-  background: var(--primary-color);
-  border-radius: 10px;
-}
 
-::-webkit-scrollbar-track {
-  background: var(--secondary-color);
-}
-
-/* Responsive Typography */
 h1, h2, h3, h4, h5, h6 {
-  font-size: calc(1.5rem + 1vw);
+  font-size: calc(1rem + 1vw);
   margin: 0;
+  text-align: center;
 }
 
 p {
-  font-size: calc(1rem + 0.2vw);
+  font-size: calc(.9rem + 0.2vw);
   line-height: 1.5;
 }
 
-/* Card Design */
-.card {
-  background-color: var(--secondary-color);
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 2px 5px var(--shadow-color);
-  margin-bottom: 20px;
-}
-
-.card-header {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.card-content {
-  font-size: 1rem;
-}
-
-/* Media Queries for Larger Screens */
-@media (min-width: 769px) {
-  .container {
-    padding: 40px;
-  }
-
-  .nav-links {
-    gap: 40px;
-  }
-ul {
-    display: none;
-}
-
-  .tab {
-    width: 100%;
-    padding: 15px 30px;
-  }
-
-  .convert-button, .add-crypto-container button {
-    padding: 14px 30px;
-  }
-}
