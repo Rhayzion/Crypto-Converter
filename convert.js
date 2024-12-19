@@ -9,6 +9,9 @@ function showTab(tabId) {
     document.querySelector(`[onclick="showTab('${tabId}')"]`).classList.add('active');
 }
 
+//Toggle Switch Ends
+
+
 // Toggle conversion direction
 let conversionDirection = 'cryptoToFiat'; // Default direction
 function toggleDirection() {
@@ -41,6 +44,7 @@ async function convertCrypto() {
     const cryptoAmount = parseFloat(document.getElementById('crypto-amount').value);
     const fiatAmount = parseFloat(document.getElementById('fiat-amount').value);
 
+    // Validate input
     if ((conversionDirection === 'cryptoToFiat' && isNaN(cryptoAmount)) ||
         (conversionDirection === 'fiatToCrypto' && isNaN(fiatAmount))) {
         alert('Please enter a valid amount.');
@@ -53,6 +57,11 @@ async function convertCrypto() {
         return;
     }
 
+    // Start button animation
+    const convertButton = document.getElementById('convert-button');
+    convertButton.classList.add('loading');
+    convertButton.disabled = true; // Prevent multiple clicks
+
     let result;
     if (conversionDirection === 'cryptoToFiat') {
         result = (cryptoAmount * exchangeRate).toFixed(2);
@@ -62,11 +71,25 @@ async function convertCrypto() {
         document.getElementById('crypto-amount').value = result;
     }
 
-    document.getElementById('conversion-result').innerText = 
-        `Conversion successful: ${conversionDirection === 'cryptoToFiat' ? cryptoAmount : fiatAmount} 
-        ${conversionDirection === 'cryptoToFiat' ? cryptoSelect : fiatSelect.toUpperCase()} 
-        is approximately ${result} ${conversionDirection === 'cryptoToFiat' ? fiatSelect.toUpperCase() : cryptoSelect}`;
+    // Delay result display for animation
+    setTimeout(() => {
+        // Stop button animation
+        convertButton.classList.remove('loading');
+        convertButton.disabled = false;
+
+        // Display conversion result
+        document.getElementById('conversion-result').innerHTML = `
+            <span class="conversion-success">Conversion successful:</span>
+            <span class="conversion-amount">${conversionDirection === 'cryptoToFiat' ? cryptoAmount : fiatAmount}</span>
+            <span class="conversion-type">${conversionDirection === 'cryptoToFiat' ? cryptoSelect : fiatSelect.toUpperCase()}</span>
+            is approximately
+            <span class="conversion-result-value">${result}</span>
+            <span class="conversion-result-currency">${conversionDirection === 'cryptoToFiat' ? fiatSelect.toUpperCase() : cryptoSelect}</span>
+        `;
+        document.getElementById('conversion-result').classList.add('fade-in'); // Optional fade-in animation
+    }, 2000); // 2-second delay
 }
+
 
 // Fetch exchange rate from an API
 async function fetchExchangeRate(crypto, fiat) {
@@ -112,46 +135,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Refresh tracker data every 5 minutes
     setInterval(loadTrackerData, 300000);
-});
-
-
-const themeToggle = document.getElementById('theme-toggle');
-const body = document.body;
-
-// Check if the user has a saved theme preference
-const savedTheme = localStorage.getItem('theme');
-
-// If a preference is saved, apply it
-if (savedTheme) {
-  body.classList.add(savedTheme); // Apply saved theme (light-mode or dark-mode)
-  const icon = themeToggle.querySelector('i');
-
-  // Set the icon according to the saved theme
-  if (savedTheme === 'light-mode') {
-    icon.classList.remove('fa-moon');
-    icon.classList.add('fa-sun');
-  } else {
-    icon.classList.remove('fa-sun');
-    icon.classList.add('fa-moon');
-  }
-}
-
-// Event listener for toggling the theme
-themeToggle.addEventListener('click', () => {
-  const icon = themeToggle.querySelector('i');
-  
-  // Toggle between light and dark modes
-  if (body.classList.contains('light-mode')) {
-    body.classList.remove('light-mode');
-    localStorage.setItem('theme', 'dark-mode'); // Save dark mode preference
-    icon.classList.remove('fa-sun');
-    icon.classList.add('fa-moon');
-  } else {
-    body.classList.add('light-mode');
-    localStorage.setItem('theme', 'light-mode'); // Save light mode preference
-    icon.classList.remove('fa-moon');
-    icon.classList.add('fa-sun');
-  }
 });
 
 
@@ -324,25 +307,3 @@ themeToggle.addEventListener('click', () => {
     });
 
     enableSorting();
-
-// Hamburger Menu Toggle
-const hamburger = document.querySelector('.hamburger');
-const navLinks = document.querySelector('.nav-links');
-
-hamburger.addEventListener('click', () => {
-  navLinks.classList.toggle('show'); // Toggle the "show" class
-});
-
-
-window.addEventListener('scroll', () => {
-  const navbar = document.querySelector('.app-navbar');
-  if (window.scrollY > 50) {
-    navbar.classList.add('sticky', 'blurred');
-  } else {
-    navbar.classList.remove('sticky', 'blurred');
-  }
-});
-
-
-
-
