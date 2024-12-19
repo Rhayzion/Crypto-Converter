@@ -125,6 +125,20 @@ select:focus {
   box-shadow: 0 0 3px var(--primary-color);
 }
 
+#toggle-direction {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    margin: 0 auto; /* Centers it horizontally within a container */
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 18px;
+    
+}
 /* Conversion Button */
 .convert-button {
   padding: 12px 25px;
