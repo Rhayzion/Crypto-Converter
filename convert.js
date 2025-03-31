@@ -199,7 +199,7 @@ const themeToggle = document.getElementById('themeToggle');
             notification.textContent = message;
             document.body.appendChild(notification);
             
-            /
+            
             notification.classList.add('animate__animated', 'animate__fadeInRight');
             
             
