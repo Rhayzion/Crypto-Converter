@@ -4,76 +4,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crypto Converter & Tracker</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@100;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Oxanium:wght@400;600;700&display=swap" rel="stylesheet">
     
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <!-- SortableJS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
-
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="convert.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-</head>
+    
+    </head>
 <body>
-   
-
-    <!-- Main Content -->
+    <!-- Particle Background -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- Web3 Decorations -->
+    <div class="web3-decoration decoration-1"></div>
+    <div class="web3-decoration decoration-2"></div>
+    
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </div>
+    
+    <!-- Main App Container -->
     <main class="app-container">
-        <h1>Crypto Converter & Tracker</h1>
+        <header class="app-header">
+            <h1 class="animate__animated animate__fadeInDown">Crypto Converter</h1>
+            <p class="animate__animated animate__fadeIn animate__delay-1s">Your gateway to the decentralized financial ecosystem</p>
+        </header>
+        
+        <!-- Tab Navigation -->
         <nav class="tab-navigation">
-            <button class="tab active" onclick="showTab('converter')">Converter</button>
-            <button class="tab" onclick="showTab('tracker')">Watchlist</button>
+            <button class="tab active" onclick="showTab('converter')">
+                <i class="fas fa-exchange-alt"></i> Converter
+            </button>
+            <button class="tab" onclick="showTab('tracker')">
+                <i class="fas fa-chart-line"></i> Watchlist
+            </button>
         </nav>
+        
+        <!-- Tab Content Container -->
         <section class="tab-content-container">
             <!-- Converter Tab -->
             <article id="converter" class="tab-content active">
-                <h2>Crypto to Fiat Converter</h2>
+                <h2>Cross-Chain Converter</h2>
                 <div class="conversion-form">
                     <div class="input-group">
-                        <label for="crypto-select">Cryptocurrency</label>
+                        <label for="crypto-select">From</label>
                         <select id="crypto-select">
                             <option value="bitcoin">Bitcoin (BTC)</option>
                             <option value="ethereum">Ethereum (ETH)</option>
                             <option value="solana">Solana (SOL)</option>
                             <option value="cardano">Cardano (ADA)</option>
                         </select>
-                        <input type="number" id="crypto-amount" placeholder="Amount in Crypto" aria-label="Amount in Cryptocurrency">
+                        <input type="number" id="crypto-amount" placeholder="0.00" aria-label="Amount in Cryptocurrency">
                     </div>
-                    <div class="conversion-icon">
+                    
+                    <div class="conversion-direction">
                         <button id="toggle-direction" aria-label="Toggle conversion direction" onclick="toggleDirection()">
-                            <i class="fas fa-exchange-alt"></i>
+                            <i class="fas fa-arrows-alt-v"></i>
                         </button>
                     </div>
+                    
                     <div class="input-group">
-                        <label for="fiat-select">Fiat Currency</label>
+                        <label for="fiat-select">To</label>
                         <select id="fiat-select">
                             <option value="usd">USD</option>
                             <option value="eur">EUR</option>
                             <option value="ngn">NGN</option>
                             <option value="gbp">GBP</option>
                         </select>
-                        <input type="text" id="fiat-amount" placeholder="Converted Amount" readonly aria-label="Converted Amount">
+                        <input type="text" id="fiat-amount" placeholder="0.00" readonly aria-label="Converted Amount">
                     </div>
-                    <button id="convert-button" class="convert-button" onclick="convertCrypto()">Convert</button>
-                    <p id="conversion-result"></p>
+                    
+                    <button id="convert-button" class="convert-button" onclick="convertCrypto()">
+                        <span id="convert-button-text">Convert</span>
+                    </button>
+                    
+                    <div id="conversion-result"></div>
                 </div>
             </article>
-
+            
             <!-- Tracker Tab -->
             <article id="tracker" class="tab-content">
-                
+                <h2>Multi-Chain Watchlist</h2>
                 <div class="watchlist-container">
-                    <h3>Crypto Watchlist</h3>
                     <div class="add-crypto-container">
                         <div class="search-group">
-                        <input id="crypto-input" type="text" placeholder="Enter cryptocurrency name (e.g., bitcoin)">
-                        <button id="add-crypto-button" onclick="addCrypto()">Add</button>
+                            <input id="crypto-input" type="text" placeholder="Search cryptocurrencies...">
+                            <button id="add-crypto-button" onclick="addCrypto()">Add</button>
                         </div>
                         <div id="suggestions" class="suggestions"></div>
                     </div>
                     <ul id="crypto-list">
-                        <!-- Watchlist items will be dynamically populated here -->
+                        <!-- Watchlist items here -->
                     </ul>
                 </div>
             </article>
